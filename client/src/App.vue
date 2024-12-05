@@ -8,7 +8,6 @@
   const router=useRouter()
   const username= computed(()=>store.state.username)
   console.log(username.value);
-
   function isActiveLink(link){
     const route=useRoute()
     return link===route.path

@@ -2,6 +2,7 @@ import {createStore} from 'vuex';
 import axios  from 'axios'
 import { useToast } from 'vue-toastification';
 const toast=useToast()
+const apiUrl=import.meta.env.VITE_API_URL
 export const store= createStore({
     state:{
         username:'',
@@ -10,7 +11,7 @@ export const store= createStore({
         currentTask:{},
 
         apiClient:axios.create({
-            baseURL:import.meta.env.VITE_API_URL,
+            baseURL:apiUrl,
         }),
     },
     mutations:{
