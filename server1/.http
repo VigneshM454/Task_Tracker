@@ -1,0 +1,75 @@
+
+post http://localhost:3000/users/login
+Content-Type: application/json
+
+{
+    "username":"hacky",
+    "password":"password"
+}
+
+###
+post http://localhost:3000/users/create
+Content-Type: application/json
+
+{
+    "username":"vignesh",
+    "password":"password",
+    "confirmpassword":"password"
+}
+
+###
+get http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhY2t5bGF6eSIsIl9pZCI6IjY3NGQ3YmJkYWUwZDA5NjE1Zjk4ODdjYSIsImlhdCI6MTczMzEzNDEwOCwiZXhwIjoxNzMzMTM3NzA4fQ.GMWA4NR9_-stJMKJfj-EoOO2MRF1nOUxi-przTe_qG0
+
+###
+get http://localhost:3000/tasks
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhY2t5bGF6eSIsIl9pZCI6IjY3NGQ3YmJkYWUwZDA5NjE1Zjk4ODdjYSIsImlhdCI6MTczMzE1MDAzMiwiZXhwIjoxNzMzMTUzNjMyfQ.tUGcM_09oqPbBvwAHkJo0QHR_dk1sDY5UDF0XMVyIPI
+
+###
+post http://localhost:3000/tasks/create
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhY2t5bGF6eSIsIl9pZCI6IjY3NGQ3YmJkYWUwZDA5NjE1Zjk4ODdjYSIsImlhdCI6MTczMzE1MDAzMiwiZXhwIjoxNzMzMTUzNjMyfQ.tUGcM_09oqPbBvwAHkJo0QHR_dk1sDY5UDF0XMVyIPI
+Content-Type: application/json
+
+{
+    "title": "dont be lazy",
+    "desc": "asfsdjklfasjkl;fk;jlasf",
+    "deadline": "2024-12-03T19:53",
+    "type": "Personal"
+}
+###
+put http://localhost:3000/tasks/edit
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhY2t5bGF6eSIsIl9pZCI6IjY3NGQ3YmJkYWUwZDA5NjE1Zjk4ODdjYSIsImlhdCI6MTczMzE2NTE3MCwiZXhwIjoxNzMzMTY4NzcwfQ.F_ZT9ycPNja9qdKtnUyTjPthfaQANDCZwoi4-HKo0oo
+Content-Type: application/json
+
+{
+    "taskId":"674dc9f0ccca747394735f04",
+    "task":{
+        "_id": "674dc9f0ccca747394735f04",
+        "title": "Don't be lazY !",
+        "desc": "asfsdjklfasjkl;fk;jlasf",
+        "deadline": "2024-12-03T14:23",
+        "isCompleted": false,
+        "type": "Personal",
+        "createdAt": "2024-12-02T14:53:36.598Z",
+        "updatedAt": "2024-12-02T14:53:36.598Z",
+        "__v": 0
+    }
+}
+
+###
+delete http://localhost:3000/tasks/delete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhY2t5bGF6eSIsIl9pZCI6IjY3NGQ3YmJkYWUwZDA5NjE1Zjk4ODdjYSIsImlhdCI6MTczMzE5NDk3NiwiZXhwIjoxNzMzMTk4NTc2fQ.ALoozsyfD3Y6o6XRPgk-xHKJ5ZmNutRZef4o5gVquGI
+Content-Type: application/json
+
+{
+    "taskId":"674dc8a109fe5c7b7f1220d5"
+}
+
+###
+PATCH  http://localhost:3000/tasks/complete
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImhhY2t5bGF6eSIsIl9pZCI6IjY3NGQ3YmJkYWUwZDA5NjE1Zjk4ODdjYSIsImlhdCI6MTczMzE2NTE3MCwiZXhwIjoxNzMzMTY4NzcwfQ.F_ZT9ycPNja9qdKtnUyTjPthfaQANDCZwoi4-HKo0oo
+Content-Type: application/json
+
+{
+    "taskId":"674dc9f0ccca747394735f04"
+}
