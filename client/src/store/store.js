@@ -10,15 +10,8 @@ export const store= createStore({
         currentTask:{},
 
         apiClient:axios.create({
-            baseURL:'https://task-tracker-489u.onrender.com',
+            baseURL:import.meta.env.VITE_API_URL,
         }),
-        // secureApiClient: axios.create({
-        //     baseURL:'https://task-tracker-489u.onrender.com',
-        //     headers:{
-        //       Authorization: `Bearer ${sessionStorage.getItem('userToken')}`
-        //     }
-        // })
-        
     },
     mutations:{
         resetState(state){
