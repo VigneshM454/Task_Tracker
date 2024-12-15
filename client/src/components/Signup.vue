@@ -1,5 +1,5 @@
 <script setup>
-    import { reactive, inject } from "vue"
+    import { reactive, inject, computed } from "vue"
     import {useRoute, useRouter } from 'vue-router'
     import {useStore} from 'vuex'
     import { useToast } from 'vue-toastification';
@@ -11,6 +11,8 @@
     const state=defineProps({
         toggleUser:Function
     })
+
+    const isDisabled=computed(()=>store.state.isDisabled)
 
     const user=reactive({
       username:'',
@@ -29,6 +31,7 @@
       }
       else{
         // console.log('ok ok')
+        store.commit('setDisable',true)
         store.dispatch('signupUser',{user,router})
       }
     }
@@ -49,7 +52,7 @@
         <label class="block text-gray-700 font-700 mb-3" for="password2">Confirm Password</label>
         <input class="border rounded w-full py-2 px-3 mb-2" type="password" name="" id="password2" v-model="user.confirmpassword">
       </div>
-      <button class="rounded-xl bg-orange-500 text-white p-2" type="submit">SignUp</button>
+      <button :disabled="isDisabled" class="rounded-xl bg-orange-500 text-white p-2" type="submit">SignUp</button>
       <p class="py-3 text-center hover:cursor-pointer pb-5" @click="state.toggleUser">Already have a account <span class="font-bold text-blue-500 ">Login</span></p>
     </form>
 </template>

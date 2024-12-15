@@ -22,7 +22,7 @@
 <template>
     <div class="p-3 bg-orange-100 min-h-[80vh] flex flex-col gap-3">
         <h1 class="text-bold text-orange-700 font-bold text-xl">Hello {{store.state.username}}</h1>
-        <div v-if="tasks.length>0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3  max-h-[80vh]  overflow-y-scroll ">
+        <div v-if="tasks.length>0" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3  max-h-[80vh]  overflow-y-auto ">
             <div v-for="task,index in tasks" :key="task._id" class="bg-orange-500 max-h-[fit-content]">
                 <TaskVue  :task=task :index=index />
             </div>

@@ -59,7 +59,11 @@
 </script>
 
 <template>
-    <div :class="((state.task.isCompleted)?'bg-green-100': isExpired(state.task.deadline)?'bg-red-100':'bg-white' )+' flex flex-col gap-3 p-3 border border-lg  shadow-gray-700 rounded-2xl h-[100%] justify-around '">
+    <div :class="((state.task.isCompleted)?
+                    'bg-green-100': 
+                    isExpired(state.task.deadline)?
+                        'bg-red-100':'bg-white' )
+            +' flex flex-col gap-3 p-3 border border-lg  shadow-gray-700 rounded-2xl h-[100%] justify-around [overflow-wrap:anywhere]'">
         <p>{{state.task.type}}</p>
         <h1 class="font-bold text-2xl">{{state.task.title}}</h1>
         <p class="">{{state.task.desc}}</p>

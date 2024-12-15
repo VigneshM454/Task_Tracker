@@ -2,19 +2,22 @@ import {createStore} from 'vuex';
 import axios  from 'axios'
 import { useToast } from 'vue-toastification';
 const toast=useToast()
-const apiUrl=import.meta.env.VITE_API_URL
+const apiUrl=`${import.meta.env.VITE_API_URL}`
 export const store= createStore({
     state:{
         username:'',
         isLoggedIn:false,
         tasks:[],
         currentTask:{},
-
+        isDisabled:false,
         apiClient:axios.create({
             baseURL:apiUrl,
         }),
     },
     mutations:{
+        setDisable(state,value){
+            state.isDisabled=value
+        },
         resetState(state){
             state.username= ''
             state.isLoggedIn=false
@@ -61,6 +64,7 @@ export const store= createStore({
         loginUser({state,commit},{user,router}){
             state.apiClient.post('/users/login',user)
             .then(data=>{
+                commit('setDisable',false)
               if(data.status==201){
                 sessionStorage.setItem('userToken',data.data.token)     
                 commit('setLoggedIn',true)
@@ -69,6 +73,7 @@ export const store= createStore({
               }
             })
             .catch(err=>{
+              commit('setDisable',false)
               console.log(err)
               toast.error(err.response.data.message)
             })//err.response.message, err.response.status    
@@ -78,6 +83,7 @@ export const store= createStore({
             state.apiClient.post('/users/create',user)
             .then(data=>{
               console.log(data)
+              commit('setDisable',false)
               if(data.status==201){
                 sessionStorage.setItem('userToken',data.data.token)     
                 commit('setLoggedIn',true)
@@ -87,6 +93,7 @@ export const store= createStore({
             })
             .catch(err=>{
               console.log(err)
+              commit('setDisable',false)
               toast.error(err.response.data.message)
             })    
         },

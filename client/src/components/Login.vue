@@ -1,5 +1,5 @@
 <script setup>
-    import { reactive } from "vue"
+    import { reactive,computed } from "vue"
     import {useRouter} from 'vue-router'
     import {useStore} from 'vuex'
     import { useToast } from 'vue-toastification';
@@ -9,6 +9,7 @@
     const router=useRouter()    
 
     const apiClient=store.state.apiClient
+    const isDisabled=computed(()=>store.state.isDisabled)
 
     const state=defineProps({
         toggleUser:Function
@@ -19,6 +20,8 @@
       password:'',
     })
 
+    
+
     function loginUser(){
       // console.log(user)
       if(user.username.length<5){
@@ -26,7 +29,9 @@
       }else if(user.password.length<8){
         toast.warning('Password is too small, min 8 letters req')
       }else{
+        store.commit('setDisable',true)
         store.dispatch('loginUser',{user,router})
+        console.log(isDisabled);
       }
     }
 </script>
@@ -41,7 +46,7 @@
         <label class="block text-gray-700 font-700 mb-3" for="password">Password</label>
         <input class="border rounded w-full py-2 px-3 mb-2" v-model="user.password"  type="password" name="" id="password">
       </div>
-      <button class="rounded-xl bg-orange-500 text-white p-2" type="submit">Login</button>
+      <button :disabled="isDisabled" class="rounded-xl bg-orange-500 text-white p-2" type="submit">Login</button>
       <p class="py-3 text-center hover:cursor-pointer pb-5" @click="state.toggleUser">Don't have an account? <span class="font-bold text-blue-500 ">Sign Up</span></p>
     </form>
 </template>
